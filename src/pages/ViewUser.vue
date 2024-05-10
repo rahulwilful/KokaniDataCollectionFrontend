@@ -66,17 +66,6 @@
               disabled
               placeholder="Enter WhatsApp Number"
             />
-
-            <label for="joining_date" class="form-label">Joining Date</label>
-            <input
-              type="text"
-              class="form-control mb-3"
-              tabindex="5"
-              id="joining_date"
-              v-model="joining_date"
-              disabled
-              placeholder="Enter Joining Date"
-            />
           </div>
         </div>
       </form>

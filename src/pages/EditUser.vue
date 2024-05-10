@@ -17,14 +17,6 @@
                 placeholder="Enter User Name"
                 autofocus
               />
-
-              <button
-                class="btn btn-primary w-100 py-2"
-                type="submit"
-                tabindex="8"
-              >
-                Edit User
-              </button>
             </div>
             <div class="col-md-6">
               <label for="email" class="form-label">Email</label>
@@ -49,24 +41,16 @@
                 tabindex="4"
                 placeholder="Enter WhatsApp Number"
               />
-
-              <label for="joining_date" class="form-label">Joining Date</label>
-              <!-- <input
-                type="text"
-                class="form-control mb-3"
-                tabindex="5"
-                id="joining_date"
-                v-model="joining_date"
-                placeholder="Enter Joining Date"
-              /> -->
-              <input
-                type="date"
-                class="form-control mb-3"
-                id="joining_date"
-                tabindex="5"
-                v-model="joining_date"
-              />
             </div>
+          </div>
+          <div class="border d-flex justify-content-center">
+            <button
+              class="btn btn-primary py-2 px-4"
+              type="submit"
+              tabindex="8"
+            >
+              Edit User
+            </button>
           </div>
         </form>
       </card>

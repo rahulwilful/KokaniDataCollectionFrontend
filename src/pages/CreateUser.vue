@@ -102,40 +102,6 @@
                 </button>
               </div>
 
-              <label for="roletype" class="form-label">User Role</label>
-              <select
-                class="form-select mb-3 custom-disabled"
-                aria-label="roleType"
-                v-model="roleType"
-                tabindex="6"
-              >
-                <option value="1" selected>Select Role Type</option>
-                <option
-                  v-for="role in roles"
-                  :value="role.name"
-                  :key="role.name"
-                >
-                  {{ role.name }}
-                </option>
-              </select>
-
-              <label for="department" class="form-label">Department</label>
-              <select
-                class="form-select mb-3 custom-disabled"
-                aria-label="department"
-                v-model="department"
-                tabindex="7"
-              >
-                <option value="1" selected>Select Department</option>
-                <option
-                  v-for="dept in departments"
-                  :value="dept._id"
-                  :key="dept._id"
-                >
-                  {{ dept.name }}
-                </option>
-              </select>
-
               <button
                 class="btn btn-primary my-3 gradient-button"
                 type="button"
@@ -167,130 +133,6 @@
                 tabindex="4"
                 placeholder="Enter WhatsApp Number"
               />
-
-              <label for="joining_date" class="form-label">Joining Date</label>
-              <input
-                type="date"
-                class="form-control mb-3 custom-disabled"
-                id="joining_date"
-                tabindex="5"
-                v-model="joining_date"
-              />
-              <!-- <input
-                type="text"
-                class="form-control mb-3"
-                tabindex="5"
-                id="joining_date"
-                v-model="joining_date"
-                placeholder="Enter Joining Date"
-              /> -->
-              <div class="row">
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input mx-3"
-                    type="checkbox"
-                    v-model="linkUIEnable"
-                    v-on:click="linkUIEnable = !linkUIEnable"
-                    id="linkUIEnable"
-                  />
-                  <label class="form-check-label mx-5" for="linkUIEnable">
-                    Link UI
-                  </label>
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input mx-3"
-                    type="checkbox"
-                    v-model="userUIEnable"
-                    v-on:click="userUIEnable = !userUIEnable"
-                    id="userUIEnable"
-                  />
-                  <label class="form-check-label mx-5" for="userUIEnable">
-                    User UI
-                  </label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input mx-3"
-                    type="checkbox"
-                    v-model="roleUIEnable"
-                    v-on:click="roleUIEnable = !roleUIEnable"
-                    id="roleUIEnable"
-                  />
-                  <label class="form-check-label mx-5" for="roleUIEnable">
-                    Role UI
-                  </label>
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input mx-3"
-                    type="checkbox"
-                    v-model="qaUIEnable"
-                    v-on:click="qaUIEnable = !qaUIEnable"
-                    id="qaUIEnable"
-                  />
-                  <label class="form-check-label mx-5" for="qaUIEnable">
-                    Quality Check UI
-                  </label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input mx-3"
-                    type="checkbox"
-                    v-model="daUIEnable"
-                    v-on:click="daUIEnable = !daUIEnable"
-                    id="daUIEnable"
-                  />
-                  <label class="form-check-label mx-5" for="daUIEnable">
-                    Data Entry UI
-                  </label>
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input mx-3"
-                    type="checkbox"
-                    v-model="retriveUIEnable"
-                    v-on:click="retriveUIEnable = !retriveUIEnable"
-                    id="retriveUIEnable"
-                  />
-                  <label class="form-check-label mx-5" for="retriveUIEnable">
-                    Retrive Data UI
-                  </label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input mx-3"
-                    type="checkbox"
-                    v-model="departmentUIEnable"
-                    v-on:click="departmentUIEnable = !departmentUIEnable"
-                    id="departmentUIEnable"
-                  />
-                  <label class="form-check-label mx-5" for="departmentUIEnable">
-                    Department UI
-                  </label>
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-check-input mx-3"
-                    type="checkbox"
-                    v-model="CRMUIEnable"
-                    v-on:click="CRMUIEnable = !CRMUIEnable"
-                    id="CRMUIEnable"
-                  />
-                  <label class="form-check-label mx-5" for="CRMUIEnable">
-                    Inquiry/Exhibitor UI
-                  </label>
-                </div>
-              </div>
             </div>
           </div>
         </form>
@@ -313,32 +155,18 @@ export default {
       email: "",
       whatsapp_no: "",
       password: "",
-      roleType: "1",
-      joining_date: "",
-      department: "1",
+
       type: ["", "info", "success", "warning", "danger"],
       notifications: {
         topCenter: false,
       },
       roles: [],
       departments: [],
-      linkUIEnable: false,
-      userUIEnable: false,
-      roleUIEnable: false,
-      qaUIEnable: false,
-      daUIEnable: false,
-      retriveUIEnable: false,
-      departmentUIEnable: false,
-      CRMUIEnable: false,
     };
   },
   async created() {
     try {
       const response = await this.checkAuthorization();
-      if (response) {
-        await this.fetchRoleData();
-        await this.fetchDeptData();
-      }
     } catch (error) {
       console.error(error);
     }
@@ -382,6 +210,7 @@ export default {
       this.departments = deptResponse.data.data;
       return;
     },
+
     async notifyVue(verticalAlign, horizontalAlign, message, NotificationType) {
       const color = NotificationType;
 
@@ -393,31 +222,19 @@ export default {
         type: color,
       });
     },
+
     async handleSubmit() {
       const user = {
         name: this.name,
         email: this.email,
         whatsapp_no: this.whatsapp_no,
         password: this.password,
-        roleType: this.roleType,
-        joining_date: this.joining_date,
-        department: this.department,
-        userUIEnable: this.userUIEnable,
-        roleUIEnable: this.roleUIEnable,
-        departmentUIEnable: this.departmentUIEnable,
-        linkUIEnable: this.linkUIEnable,
-        qaUIEnable: this.qaUIEnable,
-        daUIEnable: this.daUIEnable,
-        retriveUIEnable: this.retriveUIEnable,
-        CRMUIEnable: this.CRMUIEnable,
       };
 
       const res_getcurrent = await this.checkAuthorization();
 
       if (res_getcurrent) {
-        this.user_name = res_getcurrent.data.user.name;
-        this.user_roleType = res_getcurrent.data.user.roleType;
-        if (this.user_roleType == "admin" && this.roleType == "super_admin") {
+        /* if (this.user_roleType == "admin" && this.roleType == "super_admin") {
           this.notifyVue(
             "top",
             "center",
@@ -425,16 +242,16 @@ export default {
             "warning"
           );
           this.$router.push("/users");
-        } else {
-          const response = await axiosClient
-            .post(`user/add`, user)
-            .catch((err) => {
-              alert(err.response.data.message);
-            });
-          if (response) {
-            await this.notifyVue("top", "center", "User Created", "success");
-            this.$router.push("/users");
-          }
+        }  */
+        const response = await axiosClient
+          .post(`user/add`, user)
+          .catch((err) => {
+            alert(err.response.data.message);
+            console.log("error", error);
+          });
+        if (response) {
+          await this.notifyVue("top", "center", "User Created", "success");
+          this.$router.push("/users");
         }
       }
     },

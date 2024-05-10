@@ -77,46 +77,33 @@
             </template>
             <template #cell(action)="{ item }">
               <span class="mx-2"
-                ><a :href="'/user/view/' + item._id" style="color: #84b30e"
+                ><router-link
+                  :to="'/user/view/' + item._id"
+                  style="color: #84b30e"
                   ><i
                     class="fa fa-eye eye"
                     data-toggle="tooltip"
                     title="View User"
-                  ></i></a
+                  ></i></router-link
               ></span>
               <span class="mx-2"
-                ><a :href="'/user/edit/' + item._id" style="color: #84b30e"
+                ><router-link
+                  :to="'/user/edit/' + item._id"
+                  style="color: #84b30e"
                   ><i
                     class="fa fa-pencil pencil"
                     data-toggle="tooltip"
                     title="Edit User"
-                  ></i></a
+                  ></i></router-link
               ></span>
-              <span v-if="item.approved" class="mx-2"
-                ><i
-                  class="fa fa-thumbs-down thumbs-down"
-                  data-toggle="tooltip"
-                  title="Disapprove User"
-                  @click.prevent="handleAppDis(item._id)"
-                  style="color: #84b30e"
-                ></i
-              ></span>
-              <span v-else class="mx-2"
-                ><i
-                  class="fa fa-thumbs-up thumbs-up"
-                  data-toggle="tooltip"
-                  title="Approve User"
-                  @click.prevent="handleAppDis(`${item._id}`)"
-                  style="color: #b30e0e"
-                ></i
-              ></span>
+
               <span class="mx-2"
                 ><i
                   class="fa fa-trash trash"
                   data-toggle="tooltip"
                   title="Delete User"
                   @click.prevent="handleDelete(`${item._id}`)"
-                  style="color: #84b30e"
+                  style="color: #84b30e; cursor: pointer"
                 ></i
               ></span>
               <span class="mx-2"
@@ -125,15 +112,6 @@
                   data-toggle="tooltip"
                   title="Change User Password"
                   @click.prevent="handleChangePass(`${item._id}`)"
-                  style="color: #84b30e"
-                ></i
-              ></span>
-              <span class="mx-2"
-                ><i
-                  class="fa fa-bell bell"
-                  data-toggle="tooltip"
-                  title="Send Notification"
-                  @click.prevent="handleSendNotification(`${item._id}`)"
                   style="color: #84b30e"
                 ></i
               ></span>
@@ -364,10 +342,7 @@ export default {
           key: "whatsapp_no",
           sortable: false,
         },
-        {
-          key: "roleType",
-          sortable: true,
-        },
+
         {
           key: "approved",
           sortable: true,

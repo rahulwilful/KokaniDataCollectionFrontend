@@ -135,7 +135,29 @@ export default {
       return this.capitalizeFirstLetter(name);
     },
   },
+  async notifyVue(verticalAlign, horizontalAlign, message, NotificationType) {
+    const color = NotificationType;
+
+    await this.$notifications.notify({
+      message: `<span>${message}</span>`,
+      icon: "nc-icon nc-check-2",
+      horizontalAlign: horizontalAlign,
+      verticalAlign: verticalAlign,
+      type: color,
+    });
+  },
   methods: {
+    async notifyVue(verticalAlign, horizontalAlign, message, NotificationType) {
+      const color = NotificationType;
+
+      await this.$notifications.notify({
+        message: `<span>${message}</span>`,
+        icon: "nc-icon nc-check-2",
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: color,
+      });
+    },
     async toggleMessageSending() {
       console.log("toggleMessageSending called");
       try {
@@ -146,11 +168,21 @@ export default {
         if (response) {
           this.startMessages = !this.startMessages;
         }
-        /*  if (this.startMessages == true) {
-          this.notifyVue("top", "center", "Started Message Sending", "success");
+        if (this.startMessages == true) {
+          this.notifyVue(
+            "top",
+            "center",
+            "Started Messaging Service",
+            "success"
+          );
         } else {
-          this.notifyVue("top", "center", "Stopped Message Sending", "success");
-        } */
+          this.notifyVue(
+            "top",
+            "center",
+            "Stopped Messaging Service",
+            "success"
+          );
+        }
       } catch (err) {
         console.log("error", err);
       }
